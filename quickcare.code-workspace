@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../quickare_api_test"
+		}
+	],
+	"settings": {}
+}
