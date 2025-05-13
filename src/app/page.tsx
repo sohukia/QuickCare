@@ -2,38 +2,23 @@
 
 import { useState } from "react";
 import LocationPopup from "@/components/LocationPopup";
-import HospitalList from "@/components/hospitals/HospitalList";
+import SearchBar from "@/components/SearchBar";
+import SearchForm from "@/components/request/RequestForm";
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleLocationRequest = (getLocation: () => void) => {
-    setIsLoading(true);
-    getLocation();
-  };
-
-  const hospitals = [
-    {
-      name: "Hôpital de la Pitié-Salpêtrière",
-      address: "47-83 Boulevard de l'Hôpital, 75013 Paris",
-    },
-    {
-      name: "Hôpital Bichat-Claude Bernard",
-      address: "46 Rue Henri Huchard, 75018 Paris",
-    },
-    {
-      name: "Hôpital Saint-Louis",
-      address: "1 Avenue Claude Vellefaux, 75010 Paris",
-    },
-  ];
+  const handleSearchSubmit = (formData: {
+        position: { latitude: number; longitude: number };
+        transportMode: "vehiculePersonnel" | "transportCommun" | "aPied";
+        emergencyType: "general" | "cardiac" | "trauma" | "neurology" | "pediatrics" | "orthopedics";
+    }) => {
+        console.log("Search Request Sent:", formData);
+        // Here, you can call your API with formData
+    };
 
   return (
-    <div className="items-center justify-center w-screen h-screen flex flex-col">
-      <div>
-        {/* <LocationPopup onRequestLocation={handleLocationRequest} />
-        {isLoading && <p>Chargement de votre position...</p>} */}
-        <HospitalList hospitals={hospitals} />
-      </div>
-    </div>
-  );
+        <div className="container mx-auto p-4">
+            <h1 className="text-2xl font-bold mb-4">Rechercher un Hôpital</h1>
+            <SearchForm onSubmit={handleSearchSubmit} />
+        </div>
+    );
 }

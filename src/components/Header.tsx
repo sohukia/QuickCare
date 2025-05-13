@@ -1,32 +1,35 @@
 'use client';
 
-import { useState } from 'react'
+import { useState } from 'react';
 import {
   Dialog,
   DialogPanel,
   PopoverGroup,
-} from '@headlessui/react'
+} from '@headlessui/react';
 import {
   Bars3Icon,
   XMarkIcon,
-} from '@heroicons/react/24/outline'
+} from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white w-full h-14 z-50 shadow-md">
+    <header className="bg-white w-full z-50 shadow-md">
       <nav
         aria-label="Global"
         className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-6"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <a href="/" className="flex items-center">
             <span className="sr-only">QuickCare</span>
-            <img
-              alt=""
-              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-              className="h-6 w-auto"
+            <Image
+              src="/logo.png"
+              alt="QuickCare Logo"
+              width={40}
+              height={40}
+              className="h-8 w-auto"
             />
           </a>
         </div>
@@ -48,11 +51,6 @@ export default function Header() {
             A propos
           </a>
         </PopoverGroup>
-        {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold text-gray-900">
-            Se connecter <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div> */}
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
         <div className="fixed inset-0 z-10" />
@@ -91,14 +89,6 @@ export default function Header() {
                   A propos
                 </a>
               </div>
-              {/* <div className="py-4">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
-                >
-                  Se connecter
-                </a>
-              </div> */}
             </div>
           </div>
         </DialogPanel>
