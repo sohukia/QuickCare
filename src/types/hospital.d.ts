@@ -5,6 +5,7 @@ export type Position = {
 };
 
 export type Hospital = {
+    id: number;
     name: string;
     position: Position;
     address: string;

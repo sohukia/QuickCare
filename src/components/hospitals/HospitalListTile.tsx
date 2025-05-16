@@ -1,10 +1,13 @@
-import { Hospital } from "@/types/hospital";
+import { Hospital, Position } from "@/types/hospital";
 import { MapPin, Timer, Navigation } from "lucide-react";
 
-export default function HospitalListTile({ hospital }: { hospital: Hospital }) {
+const googleDirectionsUrl = `https://www.google.com/maps/dir/48.8566,2.3522/48.8691944,2.3341944`;
+
+
+export default function HospitalListTile({ hospital, myPosition }: { hospital: Hospital, myPosition: Position}) {
   const openInMaps = () => {
     const { latitude, longitude } = hospital.position;
-    window.open(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`, "_blank");
+    window.open(`https://www.google.com/maps/dir/${myPosition.latitude},${myPosition.longitude}/${latitude},${longitude}`, "_blank");
   };
 
   return (
@@ -28,17 +31,17 @@ export default function HospitalListTile({ hospital }: { hospital: Hospital }) {
 
         <div className="flex items-center">
           <Navigation className="w-5 h-5 text-gray-500 mr-2" />
-          <p className="text-sm">Position: {hospital.position.latitude}, {hospital.position.longitude}</p>
+          <p className="text-sm">Position : {hospital.position.latitude}, {hospital.position.longitude}</p>
         </div>
 
         <div className="flex items-center">
           <Timer className="w-5 h-5 text-gray-500 mr-2" />
-          <p className="text-sm">Temps d'attente: {hospital.currentWaitTime} min</p>
+          <p className="text-sm">Temps d'attente estimé : {hospital.currentWaitTime} min</p>
         </div>
 
         <div className="flex items-center">
           <Timer className="w-5 h-5 text-gray-500 mr-2" />
-          <p className="text-sm">Temps de trajet: {hospital.travelTime} min</p>
+          <p className="text-sm">Temps de trajet estimé : {hospital.travelTime} min</p>
         </div>
       </div>
 

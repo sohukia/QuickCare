@@ -1,11 +1,11 @@
 // src/components/HospitalList.tsx
 import { useEffect, useState, useRef, useCallback } from "react";
-import { Hospital } from "@/types/hospital";
+import { Hospital, Position } from "@/types/hospital";
 import HospitalListTile from "./HospitalListTile";
 import HospitalListTileSkeleton from "@/components/hospitals/HospitalListTileSkeleton"; 
-import { fetchHospitals } from "@/api/fetchHospitals";
+import { fetchHospitals } from "@/api/hospitals";
 
-export default function HospitalList() {
+export default function HospitalList({ myPosition } : { myPosition: Position} ) {
     const [hospitals, setHospitals] = useState<Hospital[]>([]);
     const [page, setPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
@@ -48,15 +48,16 @@ export default function HospitalList() {
     return (
         <div className="flex flex-col space-y-4">
             {hospitals.map((hospital, index) => {
+                const uniqueKey = `${hospital.id}-${index}`;
                 if (hospitals.length === index + 1) {
                     return (
-                        <div ref={lastHospitalRef} key={hospital.name}>
-                            <HospitalListTile hospital={hospital} />
+                        <div ref={lastHospitalRef} key={uniqueKey}>
+                            <HospitalListTile hospital={hospital} myPosition={myPosition}/>
                         </div>
                     );
                 } else {
                     return (
-                        <HospitalListTile key={hospital.name} hospital={hospital} />
+                        <HospitalListTile key={uniqueKey} hospital={hospital}  myPosition={myPosition}/>
                     );
                 }
             })}
