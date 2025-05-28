@@ -6,12 +6,18 @@ export interface HospitalListTileProps {
     myPosition?: { latitude: number; longitude: number };
 }
 
+const GOOGLE_MAPS_TRANSPORT_MODES = {
+    vehiculePersonnel: "0",
+    transportCommun: "3",
+    aPied: "2",
+};
+
 const getGoogleMapsDirectionsUrl = (
     from: { latitude: number; longitude: number },
     to: { latitude: number; longitude: number },
     mode: "vehiculePersonnel" | "transportCommun" | "aPied" = "vehiculePersonnel"
 ) =>
-    `https://www.google.com/maps/dir/${from.latitude},${from.longitude}/${to.latitude},${to.longitude}/data=!3m1!4b1!4m2!4m1!3e${mode === "vehiculePersonnel" ? "0" : mode === "aPied" ? "2" : "3"}`;
+    `https://www.google.com/maps/dir/${from.latitude},${from.longitude}/${to.latitude},${to.longitude}/data=!3m1!4b1!4m2!4m1!3e${GOOGLE_MAPS_TRANSPORT_MODES[mode]}`;
 
 const HospitalListTile: React.FC<HospitalListTileProps> = ({ hospital, myPosition }) => {
     const openInMaps = () => {
