@@ -2,7 +2,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import HospitalList from "../components/HospitalList";
+import HospitalList from "@/components/HospitalList";
 import type { Hospital } from "@/types/hospital";
 
 async function fetchHospitals({

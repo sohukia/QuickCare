@@ -1,11 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import LocationDisplay from "./components/LocationDisplay";
-import SearchForm from "./components/SearchForm";
-import HospitalList from "./components/HospitalList";
-import type { Hospital } from "@/types/hospital";
-import Spinner from "./components/Spinner";
-import ErrorMessage from "./components/ErrorMessage";
+import LocationDisplay from "@/components/LocationDisplay";
+import SearchForm from "@/components/SearchForm";
+import ErrorMessage from "@/components/ErrorMessage";
 
 export default function HomePage() {
   const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null);
