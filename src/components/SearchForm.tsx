@@ -27,7 +27,7 @@ const SearchForm: React.FC = () => {
 
   useEffect(() => {
       if (!navigator.geolocation) {
-        setGeoError("La géolocalisation n'est pas supportée par votre navigateur.");
+        setGeoError("La géolocalisation n&apos;est pas supportée par votre navigateur.");
         setLoading(false);
         return;
       }
@@ -37,7 +37,7 @@ const SearchForm: React.FC = () => {
           setLoading(false);
         },
         (err) => {
-          setGeoError("Impossible d'obtenir votre position : " + err.message);
+          setGeoError("Impossible d&apos;obtenir votre position : " + err.message);
           setLoading(false);
         }
       );
@@ -88,7 +88,7 @@ const SearchForm: React.FC = () => {
         </select>
       </label>
       <label className="flex flex-col gap-2 text-[#317359] font-medium">
-        <span className="mb-1">Type d'urgence</span>
+        <span className="mb-1">Type d&apos;urgence</span>
         <select
           name="emergency"
           className="border border-[#3c8a6b] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#32745a] bg-[#3c8a6b]/10"

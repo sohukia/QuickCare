@@ -57,14 +57,17 @@ export default function HospitalsPage() {
           longitude,
         });
         setHospitals(hospitals);
-      } catch (err: any) {
-        setError(err.message || "Erreur inconnue.");
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message || "Erreur inconnue.");
+        } else {
+          setError("Erreur inconnue.");
+        }
       } finally {
         setLoading(false);
       }
     };
     fetchData();
-    // eslint-disable-next-line
   }, [searchParams]);
 
   // Get myPosition for directions
