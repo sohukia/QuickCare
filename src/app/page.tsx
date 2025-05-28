@@ -10,8 +10,6 @@ import ErrorMessage from "./components/ErrorMessage";
 export default function HomePage() {
   const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [results, setResults] = useState<Hospital[] | null>(null);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -51,9 +49,7 @@ export default function HomePage() {
       <div className="p-4 bg-white/90 rounded-xl shadow max-w-2xl mx-auto mt-8">
         <LocationDisplay lat={coords.lat} lng={coords.lng} />
         <SearchForm />
-        {loading && <div className="flex flex-col items-center justify-center w-full"><Spinner /></div>}
-        {results && !loading && <HospitalList hospitals={results} />}
-        {error && !loading && <ErrorMessage message={error} />}
+        {error && <ErrorMessage message={error} />}
       </div>
     );
   }

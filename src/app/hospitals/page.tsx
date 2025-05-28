@@ -48,8 +48,8 @@ export default function HospitalsPage() {
       try {
         const latitude = parseFloat(searchParams.get("latitude") || "0");
         const longitude = parseFloat(searchParams.get("longitude") || "0");
-        const transport = searchParams.get("transport") || "vehiculePersonnel";
-        const emergency = searchParams.get("emergency") || "adulte";
+        const transport = searchParams.get("profile") || "vehiculePersonnel";
+        const emergency = searchParams.get("speciality") || "adulte";
         const hospitals = await fetchHospitals({
           transport,
           emergency,

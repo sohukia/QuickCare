@@ -6,10 +6,10 @@ export default function NotFound() {
       <div className="max-w-md">
         <h1 className="text-6xl md:text-8xl font-heading font-bold mb-6">404</h1>
         <p className="text-xl md:text-2xl font-sans mb-4">
-          Oups ! On dirait que cette page s'est égarée...
+          Oups ! On dirait que cette page s&apos;est égarée...
         </p>
         <p className="text-sm text-brand-dark/70 mb-8">
-          Peut-être qu'elle s'est perdue sur le chemin de l'hôpital.
+          Peut-être qu&apos;elle s&apos;est perdue sur le chemin de l&apos;hôpital.
         </p>
         <Link href="/">
           <span className="inline-block bg-[#377f62] text-white px-6 py-3 rounded-xl font-medium cursor-pointer">

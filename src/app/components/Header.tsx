@@ -11,6 +11,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function Header() {
         className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-6"
       >
         <div className="flex lg:flex-1">
-          <a href="/" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <span className="sr-only">QuickCare</span>
             <Image
               src="/logo.png"
@@ -32,7 +33,7 @@ export default function Header() {
               className="h-8 w-auto"
             />
             <span className="ml-2 text-xl font-bold text-white">QuickCare</span>
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -45,19 +46,19 @@ export default function Header() {
           </button>
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-8">
-          <a href="/" className="text-sm font-semibold text-white hover:text-[#3c8a6b]">
+          <Link href="/" className="text-sm font-semibold text-white hover:text-[#3c8a6b]">
             Rechercher
-          </a>
-          <a href="/about" className="text-sm font-semibold text-white hover:text-[#3c8a6b]">
+          </Link>
+          <Link href="/about" className="text-sm font-semibold text-white hover:text-[#3c8a6b]">
             A propos
-          </a>
+          </Link>
         </PopoverGroup>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
         <div className="fixed inset-0 z-10 bg-[#32745a]/80" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-[#32745a] px-4 py-4 sm:max-w-sm sm:ring-1 sm:ring-[#317359]">
           <div className="flex items-center justify-between">
-            <a href="/" className="-m-1.5 p-1.5">
+            <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">QuickCare</span>
               <Image
                 src="/logo.png"
@@ -66,7 +67,7 @@ export default function Header() {
                 height={32}
                 className="h-8 w-auto"
               />
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -79,18 +80,18 @@ export default function Header() {
           <div className="mt-4 flow-root">
             <div className="-my-4 divide-y divide-[#3c8a6b]/30">
               <div className="space-y-2 py-4">
-                <a
+                <Link
                   href="/"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-white hover:bg-[#317359]"
                 >
                   Rechercher
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/about"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-white hover:bg-[#317359]"
                 >
                   A propos
-                </a>
+                </Link>
               </div>
             </div>
           </div>

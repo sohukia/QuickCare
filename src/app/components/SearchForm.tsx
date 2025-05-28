@@ -48,8 +48,8 @@ const SearchForm: React.FC = () => {
     if (!position) return;
     setSubmitting(true);
     const params = new URLSearchParams({
-      transport,
-      emergency,
+      profile: transport, // was 'transport'
+      speciality: emergency, // was 'emergency'
       latitude: position.latitude.toString(),
       longitude: position.longitude.toString(),
     });
