@@ -6,7 +6,7 @@ import Spinner from "./Spinner";
 const TRANSPORT_OPTIONS = [
   { value: "aPied", label: "À pied" },
   { value: "vehiculePersonnel", label: "Véhicule personnel" },
-  { value: "transportEnCommun", label: "Transport en commun" },
+  { value: "transportCommun", label: "Transport en commun" },
 ];
 
 const EMERGENCY_OPTIONS = [

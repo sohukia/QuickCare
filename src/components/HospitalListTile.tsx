@@ -35,7 +35,7 @@ const HospitalListTile: React.FC<HospitalListTileProps> = ({ hospital, myPositio
                 </span>
             </div>
             <div className="text-sm text-[#377f62] mb-1 whitespace-pre-line flex items-center gap-2">
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" aria-label="Icône d'adresse" role="img">
                     <path
                     d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"
                     fill="#32745a"
@@ -45,7 +45,7 @@ const HospitalListTile: React.FC<HospitalListTileProps> = ({ hospital, myPositio
             </div>
         <div className="flex flex-wrap gap-4 mt-1 text-sm">
             <span className="flex items-center gap-1">
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" aria-label="Icône d'attente" role="img">
                     <rect x="4" y="11" width="16" height="2" rx="1" fill="#22c55e" />
                     <rect x="11" y="4" width="2" height="16" rx="1" fill="#32745a" />
                 </svg>{" "}
@@ -55,7 +55,7 @@ const HospitalListTile: React.FC<HospitalListTileProps> = ({ hospital, myPositio
                     : "N/A"}
             </span>
             <span className="flex items-center gap-1">
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" aria-label="Icône de trajet" role="img">
                     <path
                     d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"
                     fill="#32745a"

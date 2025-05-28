@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 export const metadata: Metadata = {
   title: "QuickCare",
@@ -18,7 +19,7 @@ export default function RootLayout({
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-1 flex flex-col items-center px-2 py-6 bg-[#f3f4f6] w-full">
-            {children}
+            <ErrorBoundary>{children}</ErrorBoundary>
           </main>
           <footer className="w-full text-center py-4 text-xs text-[#f3f4f6] border-t bg-[#317359]">
             © {new Date().getFullYear()} QuickCare. Pour votre santé, chaque minute compte.
