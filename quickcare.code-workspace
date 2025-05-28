@@ -4,7 +4,7 @@
 			"path": "."
 		},
 		{
-			"path": "../quickare_api_test"
+			"path": "../quickare_backend"
 		}
 	],
 	"settings": {}
