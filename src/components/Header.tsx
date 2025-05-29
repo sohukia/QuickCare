@@ -50,7 +50,7 @@ export default function Header() {
             Rechercher
           </Link>
           <Link href="/about" className="text-sm font-semibold text-white hover:text-[#3c8a6b]">
-            A propos
+            &Agrave; propos
           </Link>
         </PopoverGroup>
       </nav>
@@ -90,7 +90,7 @@ export default function Header() {
                   href="/about"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-white hover:bg-[#317359]"
                 >
-                  A propos
+                  &Agrave; propos
                 </Link>
               </div>
             </div>
