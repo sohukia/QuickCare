@@ -20,9 +20,11 @@ export default async function HospitalsPage({ searchParams }: { searchParams: Pr
   let hospitals: Hospital[] = [];
   let error: string | null = null;
   try {
-    // Use relative URL to internal API route
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/hospitals?${params.toString()}`, {
-      cache: "no-store",
+    // Use absolute URL for server-side fetch
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/api/hospitals?${params.toString()}`, {
+      cache: "force-cache",
+      next: { revalidate: 3600 }, // Revalidate every 60 seconds
     });
     if (res.ok) {
       const data = await res.json();
