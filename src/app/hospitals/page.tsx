@@ -1,88 +1,40 @@
 // src/app/hospitals/page.tsx
-"use client";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import HospitalList from "@/components/HospitalList";
+import HospitalsPageClient from "./HospitalsPageClient";
 import type { Hospital } from "@/types/hospital";
 
-async function fetchHospitals({
-  transport,
-  emergency,
-  latitude,
-  longitude,
-  page = 0,
-  limit = 50,
-}: {
-  transport: string;
-  emergency: string;
-  latitude: number;
-  longitude: number;
-  page?: number;
-  limit?: number;
-}): Promise<Hospital[]> {
+// Server component (default export)
+export default async function HospitalsPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+  const latitude = parseFloat(((await searchParams).latitude as string) || "0");
+  const longitude = parseFloat(((await searchParams).longitude as string) || "0");
+  const transport = ((await searchParams).profile as string) || "vehiculePersonnel";
+  const emergency = ((await searchParams).speciality as string) || "adulte";
+  // Build query string for internal API
   const params = new URLSearchParams({
     profile: transport,
     speciality: emergency,
     latitude: latitude.toString(),
     longitude: longitude.toString(),
-    page: page.toString(),
-    limit: limit.toString(),
+    page: "0",
+    limit: "50",
   });
-  const url = `/api/hospitals?${params.toString()}`;
-  const response = await fetch(url);
-  if (!response.ok) throw new Error("Failed to fetch hospitals");
-  const data = await response.json();
-  return data.hospitals || [];
-}
-
-export default function HospitalsPage() {
-  const searchParams = useSearchParams();
-  const [hospitals, setHospitals] = useState<Hospital[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const latitude = parseFloat(searchParams.get("latitude") || "0");
-        const longitude = parseFloat(searchParams.get("longitude") || "0");
-        const transport = searchParams.get("profile") || "vehiculePersonnel";
-        const emergency = searchParams.get("speciality") || "adulte";
-        const hospitals = await fetchHospitals({
-          transport,
-          emergency,
-          latitude,
-          longitude,
-        });
-        setHospitals(hospitals);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message || "Erreur inconnue.");
-        } else {
-          setError("Erreur inconnue.");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [searchParams]);
-
-  // Get myPosition for directions
-  const latitude = parseFloat(searchParams.get("latitude") || "0");
-  const longitude = parseFloat(searchParams.get("longitude") || "0");
+  let hospitals: Hospital[] = [];
+  let error: string | null = null;
+  try {
+    // Use relative URL to internal API route
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/hospitals?${params.toString()}`, {
+      cache: "no-store",
+    });
+    if (res.ok) {
+      const data = await res.json();
+      hospitals = data.hospitals || [];
+    } else {
+      error = "Failed to fetch hospitals";
+    }
+  } catch (err) {
+    error = err instanceof Error ? err.message : "Erreur inconnue.";
+  }
   const myPosition = { latitude, longitude };
 
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full space-y-4 p-4 bg-[#3c8a6b]/30 rounded-xl shadow max-w-2xl mx-auto mt-8">
-        <span className="text-[#317359] text-lg font-medium">Chargement des hôpitaux...</span>
-        <HospitalList hospitals={[]} loading={true} myPosition={myPosition} />
-      </div>
-    );
-  }
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center h-full space-y-4 p-4 bg-[#3c8a6b]/30 rounded-xl shadow max-w-2xl mx-auto mt-8">
@@ -91,10 +43,5 @@ export default function HospitalsPage() {
     );
   }
 
-  return (
-    <div className="p-4 bg-white/90 rounded-xl shadow max-w-2xl mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4 text-[#317359]">Hôpitaux trouvés :</h1>
-      <HospitalList hospitals={hospitals} loading={loading} myPosition={myPosition} />
-    </div>
-  );
+  return <HospitalsPageClient hospitals={hospitals} myPosition={myPosition} />;
 }
