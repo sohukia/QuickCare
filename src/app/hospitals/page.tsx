@@ -23,8 +23,7 @@ export default async function HospitalsPage({ searchParams }: { searchParams: Pr
     // Use absolute URL for server-side fetch
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const res = await fetch(`${baseUrl}/api/hospitals?${params.toString()}`, {
-      cache: "force-cache",
-      next: { revalidate: 3600 }, // Revalidate every 60 seconds
+      cache: "no-cache",
     });
     if (res.ok) {
       const data = await res.json();
